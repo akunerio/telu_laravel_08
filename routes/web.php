@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\Lat1Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +14,8 @@ use App\Http\Controllers\Lat1Controller;
 |
 */
 
-Route::get('/halo', function () {
-
-    $datax["nama"] = "<strong>Nur</strong>";
-
-    return view('welcome', $datax);
+Route::get('/', function () {
+    return view('welcome');
 });
 
-Route::resource('/product' , ProductController::class);
-
-Route::get('/lat1', [Lat1Controller::class, 'index']);
+Route::resource('product', ProductController::class);
