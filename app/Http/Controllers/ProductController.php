@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Variant;
 
 class ProductController extends Controller
 {
     public function index()
   {
-	    $prods = Product::get();
+	    $prods = Product::with('variants')->get();
+
 	    return view('product.index', ['list' => $prods]);
   }
 
@@ -43,6 +45,11 @@ class ProductController extends Controller
   public function show($id)
   {
 	    return Product::find($id);
+
+        // DB::table('product')
+        // ->select('products.*')
+        // ->where('products.id','=', $id)
+        // ->get();
   }
 
   public function edit($id)

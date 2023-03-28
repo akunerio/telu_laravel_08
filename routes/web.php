@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SiteController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +20,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('product', ProductController::class);
+Route::resource('product', ProductController::class)->middleware('auth');
+
+Route::get('/login', function () {
+  if (Auth::check()) return redirect('/product');
+  return view('login');
+})->name('login');
+
+Route::get('/logout', function () {
+  Auth::logout();
+  return redirect('/login');
+});
+
+Route::post('/auth', [SiteController::class, 'auth']);
+

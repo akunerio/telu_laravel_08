@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Variant;
+use App\Models\Product;
 
-class Product extends Model
+class Variant extends Model
 {
     use HasFactory;
-    public function variants() {
-        return $this->hasMany(Variant::class);
+
+    public function product() {
+        return $this->belongsTo(Product::class);
     }
 }
